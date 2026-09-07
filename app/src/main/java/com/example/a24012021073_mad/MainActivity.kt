@@ -21,15 +21,31 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         val arrayList = arrayOf(
-            Contact("Anubhav" , "8519075190")
-        )
+            Contact("Anubhav" , "8519075190"),
+                Contact("Arjun","820624169"))
+
         val rv = findViewById<RecyclerView>(R.id.rv_contact)
 
         rv.adapter = ContactAdapter(arrayList)
     }
+    fun getString(activity: Activity,key: String) : String?{
+        val sharedPref = activity.getSharedPreferences("app_setting_data", Context.MODE_PRIVATE)
+        return sharedPref.getString(key,"")
+
+
+    }
     fun storeString(activity: Activity,key:String,value: String){
         val sharePref = activity.getSharedPreferences("app_setting_data",Context.MODE_PRIVATE)
         val editor = sharePref.edit()
-        editor.putString()
+        editor.putString(key,value)
+        editor.commit()
+    }
+
+    fun clearString(activity: Activity)
+    {
+        val sharePref = activity.getSharedPreferences("app_setting_data", Context.MODE_PRIVATE)
+        val editor = sharePref.edit()
+        editor.clear()
+        editor.commit()
     }
 }
